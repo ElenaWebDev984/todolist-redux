@@ -21,8 +21,8 @@ import Switch from '@mui/material/Switch'
 import CssBaseline from '@mui/material/CssBaseline'
 import {containerSx} from '../TodolistItem.styles.ts'
 import {NavButton} from '../NavButton.ts'
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./store.ts";
+import {useAppSelector} from "../common/hooks/useAppSelector.ts";
+import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
 
 export type Todolist = {
   id: string
@@ -44,10 +44,10 @@ type ThemeMode = 'dark' | 'light'
 
 export const App = () => {
   //   TODO useSelector достает данные из глобального стейта и подписывается на их изменения
-  const todolists = useSelector<RootState, Todolist[]>((state) => state.todolists)
-  const tasks = useSelector<RootState, TasksState>((state) => state.tasks)
+  const todolists = useAppSelector((state) => state.todolists)
+  const tasks = useAppSelector((state) => state.tasks)
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
   const [themeMode, setThemeMode] = useState<ThemeMode>('light')
 
