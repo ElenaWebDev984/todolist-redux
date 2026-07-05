@@ -46,7 +46,6 @@ type ThemeMode = 'dark' | 'light'
 
 
 export const App = () => {
-  //   TODO useSelector достает данные из глобального стейта и подписывается на их изменения
   const todolists = useAppSelector(selectTodolists)
   const tasks = useAppSelector(selectTasks)
 
@@ -76,7 +75,7 @@ export const App = () => {
   }
 
   const deleteTodolist = (todolistId: string) => {
-    dispatch(deleteTodolistAC(todolistId))
+    dispatch(deleteTodolistAC({id: todolistId}))
   }
 
   const changeTodolistTitle = (todolistId: string, title: string) => {
