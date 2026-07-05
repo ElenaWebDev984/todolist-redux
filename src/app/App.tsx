@@ -23,7 +23,8 @@ import {containerSx} from '../TodolistItem.styles.ts'
 import {NavButton} from '../NavButton.ts'
 import {useAppSelector} from "../common/hooks/useAppSelector.ts";
 import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
-import {RootState} from "./store.ts";
+import {selectTodolists} from "../model/todolists-selectors.ts";
+import {selectTasks} from "../model/tasks-selectors.ts";
 
 export type Todolist = {
   id: string
@@ -43,8 +44,6 @@ export type TasksState = Record<string, Task[]> // TODO Record типизиру�
 
 type ThemeMode = 'dark' | 'light'
 
-export const selectTodolists = (state: RootState): Todolist[] => state.todolists
-export const selectTasks = (state: RootState): TasksState => state.tasks
 
 export const App = () => {
   //   TODO useSelector достает данные из глобального стейта и подписывается на их изменения
