@@ -1,27 +1,13 @@
-import {combineReducers, configureStore, createStore} from '@reduxjs/toolkit'
+import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import {tasksReducer} from '../model/tasks-reducer'
 import {todolistsReducer} from '../model/todolists-reducer'
+
 
 // TODO объединение reducer'ов с помощью combineReducers
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
 })
-
-// TODO initial state
-const state = {
-    tasks: {},
-    todolists: [],
-}
-
-const store = {
-    // TODO state
-    state,
-    // TODO методы по управлению стейтом
-    getState() {}, // TODO достает наш стейт
-    dispatch() {},  // TODO меняет наш стейт
-    subscribe() {}, // TODO позволяет нам подписываться на изменения какого-то кусочка стейта
-}
 
 // TODO создание store
 export const store = configureStore({
@@ -32,6 +18,9 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 // TODO автоматическое определение типа метода dispatch
 export type AppDispatch = typeof store.dispatch
+
+// TODO exemple автоматическое типизирование параметров функции
+// export type RootState = Parameters<(todolistId: string, taskId: string) => TasksState>
 
 // TODO для возможности обращения к store в консоли браузера
 // TODO @ts-ignore
