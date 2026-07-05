@@ -1,4 +1,4 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit'
+import {combineReducers, configureStore, createStore} from '@reduxjs/toolkit'
 import {tasksReducer} from '../model/tasks-reducer'
 import {todolistsReducer} from '../model/todolists-reducer'
 
@@ -7,6 +7,21 @@ const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
 })
+
+// TODO initial state
+const state = {
+    tasks: {},
+    todolists: [],
+}
+
+const store = {
+    // TODO state
+    state,
+    // TODO методы по управлению стейтом
+    getState() {}, // TODO достает наш стейт
+    dispatch() {},  // TODO меняет наш стейт
+    subscribe() {}, // TODO позволяет нам подписываться на изменения какого-то кусочка стейта
+}
 
 // TODO создание store
 export const store = configureStore({
