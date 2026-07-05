@@ -19,8 +19,6 @@ export type RootState = ReturnType<typeof store.getState>
 // TODO автоматическое определение типа метода dispatch
 export type AppDispatch = typeof store.dispatch
 
-// TODO exemple автоматическое типизирование параметров функции
-// export type RootState = Parameters<(todolistId: string, taskId: string) => TasksState>
 
 // TODO для возможности обращения к store в консоли браузера
 // TODO @ts-ignore
