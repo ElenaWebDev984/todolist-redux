@@ -1,6 +1,6 @@
 import './App.css'
 import {createTheme, ThemeProvider} from '@mui/material/styles'
-import {useReducer, useState} from 'react'
+import {useState} from 'react'
 import {CreateItemForm} from '../CreateItemForm.tsx'
 import {
   changeTaskStatusAC,
@@ -25,6 +25,8 @@ import Switch from '@mui/material/Switch'
 import CssBaseline from '@mui/material/CssBaseline'
 import {containerSx} from '../TodolistItem.styles.ts'
 import {NavButton} from '../NavButton.ts'
+import {useSelector} from "react-redux";
+import {RootState} from "./store.ts";
 
 export type Todolist = {
   id: string
@@ -40,13 +42,15 @@ export type Task = {
 
 export type FilterValues = 'all' | 'active' | 'completed'
 
-export type TasksState = Record<string, Task[]>
+export type TasksState = Record<string, Task[]> // TODO Record типизирует объекты
+// TODO variant 2 типизации - для фиксированного значения свойств и типов значений внутри объекта
+//  export type TasksState2 = {[key: string]: Task[]}
 
 type ThemeMode = 'dark' | 'light'
 
 export const App = () => {
-  const [todolists, dispatchToTodolists] = useReducer(todolistsReducer, [])
-  const [tasks, dispatchToTasks] = useReducer(tasksReducer, {})
+  const todolists = useSelector<RootState, Todolist[]>((state) => state.todolists)
+  const tasks = useSelector<RootState, TasksState>((state) => state.tasks)
 
   const [themeMode, setThemeMode] = useState<ThemeMode>('light')
 
