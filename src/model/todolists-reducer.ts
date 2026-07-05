@@ -7,8 +7,11 @@ const initialState: Todolist[] = []
 export const deleteTodolistAC = createAction<{id: string}>('todolists/deleteTodolist')
 export const changeTodolistTitleAC = createAction<{id: string, title: string}>('todolists/changeTodolistTitle')
 export const changeTodolistFilterAC = createAction<{id: string, filter: FilterValues}>('todolists/changeTodolistFilter')
-// export const changeTodolistFilterAC = (payload: {id: string, filter: FilterValues}) => {
-//     return {type: 'change_todolist_filter', payload} as const
+export const createTodolistAC = createAction('todolists/createTodolist', (title: string) => {
+    return {payload: { title, id: v1() }}
+})
+// export const createTodolistAC = (title: string) => {
+//     return {type: 'create_todolist', payload: { title, id: v1() }} as const
 // }
 
 export const todolistsReducer = (state: Todolist[] = initialState, action: Actions): Todolist[] => {
@@ -30,13 +33,6 @@ export const todolistsReducer = (state: Todolist[] = initialState, action: Actio
       return state
   }
 }
-
-
-
-export const createTodolistAC = (title: string) => {
-  return {type: 'create_todolist', payload: { title, id: v1() }} as const
-}
-
 
 export type DeleteTodolistAction = ReturnType<typeof deleteTodolistAC>
 export type CreateTodolistAction = ReturnType<typeof createTodolistAC>
