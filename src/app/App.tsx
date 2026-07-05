@@ -49,6 +49,7 @@ export type TasksState = Record<string, Task[]> // TODO Record типизиру�
 type ThemeMode = 'dark' | 'light'
 
 export const App = () => {
+  //   TODO useSelector достает данные из глобального стейта и подписывается на их изменения
   const todolists = useSelector<RootState, Todolist[]>((state) => state.todolists)
   const tasks = useSelector<RootState, TasksState>((state) => state.tasks)
 
