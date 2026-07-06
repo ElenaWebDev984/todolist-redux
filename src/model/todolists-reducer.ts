@@ -1,5 +1,5 @@
 import type {FilterValues, Todolist} from '../app/App.tsx'
-import {createAction, createReducer, nanoid, PayloadAction} from "@reduxjs/toolkit";
+import {createAction, createReducer, nanoid} from "@reduxjs/toolkit";
 
 
 export const deleteTodolistAC = createAction<{id: string}>('todolists/deleteTodolist')
@@ -17,11 +17,14 @@ export const todolistsReducer = createReducer(initialState, (builder) => {
         const index = state.findIndex(todo => todo.id === action.payload.id)
         if (index!== -1) state.splice(index, 1)
       })
-      .addCase(changeTodolistTitleAC.type, (state, action: PayloadAction<{id: string, title: string}>) => {
+      .addCase(changeTodolistTitleAC, (state, action) => {
         const index = state.findIndex(todo => todo.id === action.payload.id)
         if (index !== -1) state[index].title = action.payload.title
       })
-      .addCase()
+      .addCase(changeTodolistFilterAC, (state, action) => {
+          const index = state.findIndex(todo => todo.id === action.payload.id)
+          if (index !== -1) state[index].filter = action.payload.filter
+      })
       .addCase()
 })
 
@@ -31,9 +34,6 @@ export const todolistsReducer2 = (state: Todolist[] = initialState, action: Acti
     case 'create_todolist': {
       const newTodolist: Todolist = {id: action.payload.id, title: action.payload.title, filter: 'all'}
       return [...state, newTodolist]
-    }
-    case 'change_todolist_title': {
-      return state.map(todolist => todolist.id === action.payload.id ? {...todolist, title: action.payload.title} : todolist)
     }
     case 'change_todolist_filter': {
       return state.map(todolist => todolist.id === action.payload.id ? {...todolist, filter: action.payload.filter} : todolist)
