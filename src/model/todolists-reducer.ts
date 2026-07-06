@@ -25,7 +25,9 @@ export const todolistsReducer = createReducer(initialState, (builder) => {
           const todolist = state.find(todo => todo.id === action.payload.id)
           if (todolist) todolist.filter = action.payload.filter
       })
-      .addCase()
+      .addCase(createTodolistAC, (state, action) => {
+          state.push({id: action.payload.id, title: action.payload.title, filter: 'all'})
+      })
 })
 
 
@@ -34,9 +36,6 @@ export const todolistsReducer2 = (state: Todolist[] = initialState, action: Acti
     case 'create_todolist': {
       const newTodolist: Todolist = {id: action.payload.id, title: action.payload.title, filter: 'all'}
       return [...state, newTodolist]
-    }
-    case 'change_todolist_filter': {
-      return state.map(todolist => todolist.id === action.payload.id ? {...todolist, filter: action.payload.filter} : todolist)
     }
     default:
       return state
