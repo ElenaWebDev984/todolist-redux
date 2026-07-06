@@ -26,30 +26,8 @@ export const todolistsReducer = createReducer(initialState, (builder) => {
           if (todolist) todolist.filter = action.payload.filter
       })
       .addCase(createTodolistAC, (state, action) => {
-          const newTodolist: Todolist = {id: action.payload.id, title: action.payload.title, filter: 'all'}
-          state.push(newTodolist)
+          state.push({id: action.payload.id, title: action.payload.title, filter: 'all'})
       })
 })
 
 
-export const todolistsReducer2 = (state: Todolist[] = initialState, action: Actions): Todolist[] => {
-  switch (action.type) {
-    case 'create_todolist': {
-      const newTodolist: Todolist = {id: action.payload.id, title: action.payload.title, filter: 'all'}
-      return [...state, newTodolist]
-    }
-    default:
-      return state
-  }
-}
-
-export type DeleteTodolistAction = ReturnType<typeof deleteTodolistAC>
-export type CreateTodolistAction = ReturnType<typeof createTodolistAC>
-export type ChangeTodolistTitleAction = ReturnType<typeof changeTodolistTitleAC>
-export type ChangeTodolistFilterAction = ReturnType<typeof changeTodolistFilterAC>
-
-type Actions =
-    | DeleteTodolistAction
-    | CreateTodolistAction
-    | ChangeTodolistTitleAction
-    | ChangeTodolistFilterAction
