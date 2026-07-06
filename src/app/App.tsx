@@ -40,7 +40,7 @@ export type Task = {
 
 export type FilterValues = 'all' | 'active' | 'completed'
 
-export type TasksState = Record<string, Task[]> // TODO Record типизирует объекты
+export type TasksState = Record<string, Task[]> // Record типизирует объекты
 
 type ThemeMode = 'dark' | 'light'
 
