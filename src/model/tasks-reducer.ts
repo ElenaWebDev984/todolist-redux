@@ -10,7 +10,7 @@ export const tasksReducer = createReducer(initialState, (builder) => {
         delete state[action.payload.id]
       })
       .addCase(createTodolistAC, (state, action) => {
-
+        state[action.payload.id] = []
       })
       .addCase()
       .addCase()
@@ -44,11 +44,6 @@ export const tasksReducer2 = (state: TasksState = initialState, action: Actions)
     }
     case "create_todolist": {
       return {...state, [action.payload.id]: []}
-    }
-    case "delete_todolist": {
-      const newState = {...state}
-      delete newState[action.payload.id]
-      return newState
     }
   }
 }
