@@ -22,19 +22,15 @@ export const tasksReducer = createReducer(initialState, (builder) => {
         const index = state[action.payload.todolistId].findIndex(task => task.id === action.payload.taskId)
         if (index !== -1) state[action.payload.todolistId].splice(index, 1)
       })
-      .addCase()
+      .addCase(createTaskAC, (state, action) => {
+        state[action.payload.todolistId].unshift({title: action.payload.title, isDone: false, id: nanoid()})
+      })
       .addCase()
       .addCase()
 })
 
 export const tasksReducer2 = (state: TasksState = initialState, action: Actions): TasksState => {
   switch (action.type) {
-    case 'delete_task': {
-      return {
-        ...state,
-        [action.payload.todolistId]: state[action.payload.todolistId].filter(task => task.id !== action.payload.taskId)
-      }
-    }
     case 'create_task': {
       const newTask: Task = {title: action.payload.title, isDone: false, id: nanoid()}
       return {...state, [action.payload.todolistId]: [newTask, ...state[action.payload.todolistId]]}
