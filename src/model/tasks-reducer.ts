@@ -1,6 +1,11 @@
 import type {Task, TasksState} from '../app/App.tsx'
 import {createTodolistAC,  deleteTodolistAC} from './todolists-reducer'
-import {createReducer, nanoid} from "@reduxjs/toolkit";
+import {createAction, createReducer, nanoid} from "@reduxjs/toolkit";
+
+export const deleteTaskAC = createAction<{ todolistId: string, taskId: string }>('tasks/deleteTask')
+// export const deleteTaskAC = (payload: { todolistId: string, taskId: string }) => {
+//   return {type: 'delete_task', payload} as const
+// }
 
 const initialState: TasksState = {}
 
@@ -42,15 +47,9 @@ export const tasksReducer2 = (state: TasksState = initialState, action: Actions)
         [action.payload.todolistId]: state[action.payload.todolistId].map(task => task.id === action.payload.taskId ? {...task, title: action.payload.title} : task)
       }
     }
-    case "create_todolist": {
-      return {...state, [action.payload.id]: []}
-    }
   }
 }
 
-export const deleteTaskAC = (payload: { todolistId: string, taskId: string }) => {
-  return {type: 'delete_task', payload} as const
-}
 
 export const createTaskAC = (payload: { todolistId: string, title: string }) => {
   return {type: 'create_task', payload} as const
@@ -74,5 +73,3 @@ type Actions =
     | CreateTaskAction
     | ChangeTaskStatusAction
     | ChangeTaskTitleAction
-    | CreateTodolistAction
-    | DeleteTodolistAction
