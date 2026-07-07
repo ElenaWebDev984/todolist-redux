@@ -3,8 +3,10 @@ import {createTodolistAC,  deleteTodolistAC} from './todolists-reducer'
 import {createAction, createReducer, nanoid} from "@reduxjs/toolkit";
 
 export const deleteTaskAC = createAction<{ todolistId: string, taskId: string }>('tasks/deleteTask')
-// export const deleteTaskAC = (payload: { todolistId: string, taskId: string }) => {
-//   return {type: 'delete_task', payload} as const
+
+export const createTaskAC = createAction<{ todolistId: string, title: string }>('tasks/createTask')
+// export const createTaskAC = (payload: { todolistId: string, title: string }) => {
+//   return {type: 'create_task', payload} as const
 // }
 
 const initialState: TasksState = {}
@@ -50,10 +52,6 @@ export const tasksReducer2 = (state: TasksState = initialState, action: Actions)
   }
 }
 
-
-export const createTaskAC = (payload: { todolistId: string, title: string }) => {
-  return {type: 'create_task', payload} as const
-}
 
 export const changeTaskStatusAC = (payload: { todolistId: string, taskId: string, isDone: boolean }) => {
   return {type: 'change_task_status', payload} as const
